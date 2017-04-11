@@ -95,6 +95,7 @@ class TridentTD_OpenWeather {
     
 
     HTTPClient  _http;
+    bool    _getSuccess;
     String  _lat;
     String  _lon;
     String  _unit_type;

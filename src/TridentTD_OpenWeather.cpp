@@ -38,6 +38,8 @@ SOFTWARE.
 TridentTD_OpenWeather::TridentTD_OpenWeather(String api_key){
   _api_key = api_key;
   _unit_type = "metric";  //or "imperial"
+
+  _getSuccess = false;
 }
 
 void TridentTD_OpenWeather::setLocation(float lat, float lon){
@@ -89,6 +91,8 @@ bool TridentTD_OpenWeather::weatherNow(){
   int httpCode = _http.GET();
   if(httpCode > 0) {
     if(httpCode == HTTP_CODE_OK) {
+      _getSuccess = true;
+
       String payload = _http.getString();
       
       DEBUG_PRINTLN(payload);DEBUG_PRINTLN();
@@ -113,39 +117,48 @@ bool TridentTD_OpenWeather::weatherNow(){
   } else {
     DEBUG_PRINT("[HTTP] GET... failed, error: "); DEBUG_PRINTLN(_http.errorToString(httpCode).c_str());
     _http.end();
+    _getSuccess = false;
     return false;
   }
 }
 
 float TridentTD_OpenWeather::readTemperature(){
+  while( !_getSuccess ) { weatherNow(); }
   return _temperature;
 }
 
 float TridentTD_OpenWeather::readHumidity(){
+  while( !_getSuccess ) { weatherNow(); }
   return _humidity;
 }
 
 int TridentTD_OpenWeather::readPressure(){
+  while( !_getSuccess ) { weatherNow(); }
   return _pressure;
 }
 
 String TridentTD_OpenWeather::readWeather(){
+  while( !_getSuccess ) { weatherNow(); }
   return _weather;
 }
 
 float TridentTD_OpenWeather::readWindSpeed(){
+  while( !_getSuccess ) { weatherNow(); }
   return _windspeed;
 }
 
 int TridentTD_OpenWeather::readWindDeg(){
+  while( !_getSuccess ) { weatherNow(); }
   return _winddeg;
 }
 
 int TridentTD_OpenWeather::readCloudiness(){
+  while( !_getSuccess ) { weatherNow(); }
   return _cloudiness;
 }
 
 String TridentTD_OpenWeather::readSunrise(int timezone){
+  while( !_getSuccess ) { weatherNow(); }
 
   time_t t = _sunrise + timezone*3600;
   String buffer  = ctime(&t);
@@ -156,30 +169,14 @@ String TridentTD_OpenWeather::readSunrise(int timezone){
 
 
 String TridentTD_OpenWeather::readSunset(int timezone){
+  while( !_getSuccess ) { weatherNow(); }
+
   time_t t = _sunset + timezone*3600;
   String buffer  = ctime(&t);
   String sunset  = buffer.substring( buffer.indexOf(":") - 2, buffer.indexOf(":") + 6);
 
   return  sunset;
 }
-
-
-// String TridentTD_OpenWeather::getTimeStr(time_t t) {
-
-//   if (t != 0 ) {
-//     String timeStr = "";
-//     timeStr += ( (hour(t)<10)? "0":"" )+ hour(t);
-//     timeStr += ":";
-//     timeStr += ( (minute(t)<10)? "0":"" )+ minute(t);
-//     timeStr += ":";
-//     timeStr += ( (second(t)<10)? "0":"" )+ second(t);
-
-//     return timeStr;
-//   }
-//   else return "Time not set";
-// }
-
-
 
 bool TridentTD_OpenWeather::wificonnect(char* ssid, char* pass){
   WiFi.begin(ssid, pass);
