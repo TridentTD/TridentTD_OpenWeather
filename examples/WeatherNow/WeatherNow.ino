@@ -15,8 +15,6 @@ TridentTD_OpenWeather myPlace(OpenWeather_APIKEY);
   
 void setup() {
   // put your setup code here, to run once:
-  char buffer[10];
-  
   Serial.begin(115200);
   Serial.println();
   Serial.println(myPlace.getVersion());
