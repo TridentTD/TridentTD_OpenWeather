@@ -38,7 +38,7 @@ SOFTWARE.
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
-#define  TridentTD_DEBUG_MODE
+//#define  TridentTD_DEBUG_MODE
 
 #ifdef TridentTD_DEBUG_MODE
     #define DEBUG_PRINTER Serial
