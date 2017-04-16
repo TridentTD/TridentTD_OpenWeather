@@ -7,23 +7,95 @@ TridentTD_OpenWeather is a library for ESP8266
 to get Weather Status at any place by latitude, longitude   
 from OpenWeatherMap API in the simplest method.
 
-You can use functions like this
+# Install
 
-- TridentTD_OpenWeather myPlace(OpenWeather_APIKEY);
-- myPlace.wificonnect( ssid,password );
-- myPlace.setLocation( lat, lon );
-- myPlace.setUnit("metric");  // "metric" (celcius, meter/sec) or "imperial" (fahrenheit, miles/hour)
-- myPlace.weatherNow();
-- myPlace.readTemperature();  // unit = celcius (metric) or Fahrenheit (imperial)
-- myPlace.readHumidity();     // unit = %
-- myPlace.readPressure();      // unit = hPa
-- myPlace.readWeather(); 
-- myPlace.readWindSpeed(); // unit = meter/sec (metric) or miles/hour (imperial)
-- myPlace.readWindDeg();    // unit = degrees
-- myPlace.readCloudiness();  // unit = %
-- myPlace.readSunrise(timezone);
-- myPlace.readSunset(timezone);
-- myLine.getVersion();
+Clone (or download and unzip) the repository to `~/Documents/Arduino/libraries`
+where `~/Documents/Arduino` is your sketchbook directory.
+
+    > cd ~/Documents/Arduino
+    > mkdir libraries
+    > cd libraries
+    > git clone https://github.com/TridentTD/TridentTD_OpenWeather.git TridentTD_OpenWeather
+
+# Usage
+
+### Include
+
+You need to have the `ESP8266` board support already included.
+
+### TridentTD\_OpenWeather  myPlace(OpenWeather_APIKEY)
+
+Constructor to create an TridentTD\_OpenWeather object.
+
+```c++
+ TridentTD_OpenWeather  myPlace(OpenWeather_APIKEY);
+```
+
+### wificonnect( ssid,password)
+
+Setup the `ESP8266` board's `wifi` to the `ssid` . 
+However you can connect by yourself.
+
+```c++
+myPlace.wificonnect( ssid,password );
+```
+
+###setLocation( lat, lon )
+
+Set up your location by latitude and longitude.
+
+```c++
+myPlace.setLocation( lat, lon );
+```
+
+###setUnit( unit_type); 
+
+Set up unit type.  By default "metric" (celcius, meter/sec).  
+Or "imperial" (fahrenheit, miles/hour)
+
+```c++
+myPlace.setUnit("metric");
+myPlace.setUnit("imperial");
+```
+
+###weatherNow()
+
+Get weather information of your place.
+
+```c++
+myPlace.weatherNow();
+```
+
+###readTemperature()
+###readHumidity()
+###readPressure()
+###readWeather()
+###readWindSpeed()
+###readWindDeg()
+###readCloudiness()
+###readSunrise(timezone)
+###readSunset(timezone)
+
+
+```c++
+myPlace.readTemperature();  // unit = celcius (metric) or Fahrenheit (imperial)
+myPlace.readHumidity();     // unit = %
+myPlace.readPressure();      // unit = hPa
+myPlace.readWeather(); 
+myPlace.readWindSpeed(); // unit = meter/sec (metric) or miles/hour (imperial)
+myPlace.readWindDeg();    // unit = degrees
+myPlace.readCloudiness();  // unit = %
+myPlace.readSunrise(timezone);
+myPlace.readSunset(timezone);
+```
+
+###getVersion()
+
+Get version of this library.
+
+```c++
+myLine.getVersion();
+```
 
 Version
 =====
