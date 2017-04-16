@@ -83,12 +83,12 @@ myPlace.weatherNow();
 
 ```c++
 myPlace.readTemperature();  // unit = celcius (metric) or Fahrenheit (imperial)
-myPlace.readHumidity();     // unit = %
-myPlace.readPressure();      // unit = hPa
+myPlace.readHumidity();       // unit = %
+myPlace.readPressure();        // unit = hPa
 myPlace.readWeather(); 
-myPlace.readWindSpeed(); // unit = meter/sec (metric) or miles/hour (imperial)
-myPlace.readWindDeg();    // unit = degrees
-myPlace.readCloudiness();  // unit = %
+myPlace.readWindSpeed();   // unit = meter/sec (metric) or miles/hour (imperial)
+myPlace.readWindDeg();      // unit = degrees
+myPlace.readCloudiness();   // unit = %
 myPlace.readSunrise(timezone);
 myPlace.readSunset(timezone);
 ```
