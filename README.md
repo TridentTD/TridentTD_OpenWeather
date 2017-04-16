@@ -40,7 +40,7 @@ However you can connect by yourself.
 myPlace.wificonnect( ssid,password );
 ```
 
-###setLocation( lat, lon )
+### setLocation( lat, lon )
 
 Set up your location by latitude and longitude.
 
@@ -48,7 +48,7 @@ Set up your location by latitude and longitude.
 myPlace.setLocation( lat, lon );
 ```
 
-###setUnit( unit_type); 
+### setUnit( unit_type); 
 
 Set up unit type.  By default "metric" (celcius, meter/sec).  
 Or "imperial" (fahrenheit, miles/hour)
@@ -58,7 +58,7 @@ myPlace.setUnit("metric");
 myPlace.setUnit("imperial");
 ```
 
-###weatherNow()
+### weatherNow()
 
 Get weather information of your place.
 
@@ -66,15 +66,15 @@ Get weather information of your place.
 myPlace.weatherNow();
 ```
 
-###readTemperature()
-###readHumidity()
-###readPressure()
-###readWeather()
-###readWindSpeed()
-###readWindDeg()
-###readCloudiness()
-###readSunrise(timezone)
-###readSunset(timezone)
+### readTemperature()
+### readHumidity()
+### readPressure()
+### readWeather()
+### readWindSpeed()
+### readWindDeg()
+### readCloudiness()
+### readSunrise(timezone)
+### readSunset(timezone)
 
 
 ```c++
