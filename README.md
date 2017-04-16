@@ -23,6 +23,10 @@ where `~/Documents/Arduino` is your sketchbook directory.
 
 You need to have the `ESP8266` board support already included.
 
+```c++
+#include <TridentTD_OpenWeather.h>
+```
+
 ### TridentTD\_OpenWeather  myPlace(OpenWeather_APIKEY)
 
 Constructor to create an TridentTD\_OpenWeather object.
@@ -48,7 +52,7 @@ Set up your location by latitude and longitude.
 myPlace.setLocation( lat, lon );
 ```
 
-### setUnit( unit_type); 
+### setUnit( unit_type)
 
 Set up unit type.  By default "metric" (celcius, meter/sec).  
 Or "imperial" (fahrenheit, miles/hour)
