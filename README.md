@@ -64,7 +64,7 @@ myPlace.setUnit("imperial");
 
 ### weatherNow()
 
-Get weather information of your place.
+Get weather information of your place at now.
 
 ```c++
 myPlace.weatherNow();
@@ -98,7 +98,7 @@ myPlace.readSunset(timezone);
 Get version of this library.
 
 ```c++
-myLine.getVersion();
+myPlace.getVersion();
 ```
 
 Version
