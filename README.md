@@ -93,7 +93,7 @@ myPlace.readSunrise(timezone);
 myPlace.readSunset(timezone);
 ```
 
-###getVersion()
+### getVersion()
 
 Get version of this library.
 
