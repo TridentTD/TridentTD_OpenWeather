@@ -3,7 +3,7 @@ TridentTD_OpenWeather
 [TridentTD] Manabu's Esp8266 IoT Library
 ---------------------------------------------
 
-TridentTD_OpenWeather is a library for ESP8266   
+`TridentTD_OpenWeather` is a library for `ESP8266` board  
 to get Weather Status at any place by latitude, longitude   
 from OpenWeatherMap API in the simplest method.
 
