@@ -106,4 +106,4 @@ Version
 1.0.0  TridentTD_OpenWeather
 
 @ 11 April 2560 BE (Buddism Era)  / 2017  
-Ven. Phaisarn Techajaruwong
+TridentTD
