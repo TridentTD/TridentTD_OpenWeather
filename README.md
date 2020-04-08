@@ -109,9 +109,4 @@ Version
   
 @ 25 May 2561 BE (Buddhism Era) / 2018  
 Ven. Phaisarn Techajaruwong
-=======
-1.0.0  TridentTD_OpenWeather
 
-@ 11 April 2560 BE (Buddism Era)  / 2017  
-TridentTD
->>>>>>> 4995ca8df418e660fd0a355dbde8babd73d1ea8d
