@@ -1,9 +1,9 @@
 TridentTD_OpenWeather
 ============
-[TridentTD] Manabu's Esp8266 IoT Library
+[TridentTD] Esp8266, ESP32 's OpenWeather Library
 ---------------------------------------------
 
-`TridentTD_OpenWeather` is a library for `ESP8266` board  
+`TridentTD_OpenWeather` is a library for `ESP8266` , `ESP32` board  
 to get Weather Status at any place by latitude, longitude   
 from OpenWeatherMap API in the simplest method.
 
@@ -21,7 +21,7 @@ where `~/Documents/Arduino` is your sketchbook directory.
 
 ### Include
 
-You need to have the `ESP8266` board support already included.
+You need to have the `ESP8266` or `ESP32`board support already included.
 
 ```c++
 #include <TridentTD_OpenWeather.h>
@@ -103,7 +103,8 @@ myPlace.getVersion();
 
 Version
 =====
-1.0.0  TridentTD_OpenWeather
-
-@ 11 April 2560 BE (Buddism Era)  / 2017  
+1.0.0  TridentTD_OpenWeather  
+2.0.0  support ESP32  
+  
+@ 25 May 2561 BE (Buddhism Era) / 2018  
 Ven. Phaisarn Techajaruwong

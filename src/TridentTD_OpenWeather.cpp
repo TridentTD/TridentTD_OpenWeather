@@ -5,10 +5,10 @@
  
  TridentTD_OpenWeather.h - A simple client for OpenWeatherMap
 
- Version 1.0  03/04/2560 Buddism Era  (2017)
- 
+ Version 1.0  03/04/2560 Buddism Era  (2017) , support ESP8266
+ Version 2.0  25/05/2561 Buddism Era  (2017) , support ESP32
 
-Copyright (c) 2016 TridentTD
+Copyright (c) 2016-2020 TridentTD
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

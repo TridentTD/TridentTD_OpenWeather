@@ -5,10 +5,10 @@
 
 #define OpenWeather_APIKEY    "----- API KEY -----"
 
-#define lat       ----- LATITUDE  -----
-#define lon       ----- LONGITUDE -----
+#define lat       13.7530216
+#define lon       100.4897376
 
-#define timezone  ----- TIMEZONE -----
+#define timezone  7
 
 
 TridentTD_OpenWeather myPlace(OpenWeather_APIKEY);
