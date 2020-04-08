@@ -103,7 +103,6 @@ myPlace.getVersion();
 
 Version
 =====
-<<<<<<< HEAD
 1.0.0  TridentTD_OpenWeather  
 2.0.0  support ESP32  
   
