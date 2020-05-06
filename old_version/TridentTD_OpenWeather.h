@@ -7,8 +7,7 @@
 
  Version 1.0  03/04/2560 Buddism Era  (2017) , support ESP8266
  Version 2.0  25/05/2561 Buddism Era  (2017) , support ESP32
- Version 3.0  06/05/2563 Buddism Era  (2020) , json parser by ArduinoJson 6.x
- 
+
 Copyright (c) 2016-2020 TridentTD
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -49,7 +48,7 @@ SOFTWARE.
   //#include <WiFiClientSecure.h>
 #endif
 
-// #define  TridentTD_DEBUG_MODE
+//#define  TridentTD_DEBUG_MODE
 
 #ifdef TridentTD_DEBUG_MODE
     #define DEBUG_PRINTER Serial
@@ -75,19 +74,14 @@ class TridentTD_OpenWeather {
     bool    weatherNow();
 
     float   readTemperature();
-    float   readTempMin();
-    float   readTempMax();
-    float   readTempFeelsLike();
     float   readHumidity();
     int     readPressure();
     String  readWeather();
-    String  readWeatherIcon();  // "xxxxxx.png"
     float   readWindSpeed();
     int     readWindDeg();
     int     readCloudiness();
     String  readSunrise(int timezone);
     String  readSunset(int timezone);
-    String  readDateTime(int timezone);
 
     String  latitude();
     String  longitude();
@@ -95,15 +89,11 @@ class TridentTD_OpenWeather {
     bool    wificonnect(char *ssid, char *pass);
     String  getVersion();
   private:
-    float   _version = 3.0;
+    float   _version = 2.0;
     String  _api_key;
 
     String  _weather;
-    String  _weather_icon;
     float   _temperature;  // Calcius
-    float   _feels_like;
-    float   _temp_min;
-    float   _temp_max;
     float   _humidity;    // %
     int     _pressure;      // hPa
     float   _windspeed;    // meter/sec
@@ -111,7 +101,6 @@ class TridentTD_OpenWeather {
     int     _cloudiness;  // %
     time_t  _sunrise;    // unix, UTC
     time_t  _sunset;    // unix, UTC
-    time_t  _dt;         // datetime unix, UTC
 
     
 

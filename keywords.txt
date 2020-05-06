@@ -12,22 +12,26 @@ TridentTD_OpenWeather	KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
-setLocation       KEYWORD2
-setUnit           KEYWORD2
-weatherNow        KEYWORD2
+setLocation	KEYWORD2
+setUnit	KEYWORD2
+weatherNow	KEYWORD2
 
-readTemperature   KEYWORD2
-readHumidity      KEYWORD2
-readPressure      KEYWORD2
-readWeather       KEYWORD2
-readWindSpeed     KEYWORD2
-readWindDeg       KEYWORD2
-readCloudiness    KEYWORD2
-readSunrise       KEYWORD2
-readSunset        KEYWORD2
+readTemperature	KEYWORD2
+readTempMin	KEYWORD2
+readTempMax	KEYWORD2
+readTempFeelsLike	KEYWORD2
+readHumidity	KEYWORD2
+readPressure	KEYWORD2
+readWeather	KEYWORD2
+readWeatherIcon	KEYWORD2
+readWindSpeed	KEYWORD2
+readWindDeg	KEYWORD2
+readCloudiness	KEYWORD2
+readSunrise	KEYWORD2
+readSunset	KEYWORD2
 
-wificonnect 	    KEYWORD2
-getVersion        KEYWORD2
+wificonnect	KEYWORD2
+getVersion	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

@@ -35,6 +35,9 @@ void setup() {
   Serial.println("--------------------------------------------");
   Serial.println("[OpenWeather] Location   : " + myPlace.latitude() + ", "+ myPlace.longitude() );
   Serial.println("[OpenWeather] Temperature: " + String(myPlace.readTemperature()));  // [metric] Celcius  or [imperial] Fahrenheit
+  Serial.println("[OpenWeather] Temp Min   : " + String(myPlace.readTempMin()));  // [metric] Celcius  or [imperial] Fahrenheit
+  Serial.println("[OpenWeather] Temp Max   : " + String(myPlace.readTempMax()));  // [metric] Celcius  or [imperial] Fahrenheit
+  Serial.println("[OpenWeather] Feels-Like : " + String(myPlace.readTempFeelsLike()));  // [metric] Celcius  or [imperial] Fahrenheit
   Serial.println("[OpenWeather] Humidity   : " + String(myPlace.readHumidity()));     // %
   Serial.println("[OpenWeather] Pressure   : " + String(myPlace.readPressure()));     // hPa
   Serial.println("[OpenWeather] Weather    : " + myPlace.readWeather());
@@ -43,7 +46,9 @@ void setup() {
   Serial.println("[OpenWeather] Cloudiness : " + String(myPlace.readCloudiness()));   // %
   Serial.println("[OpenWeather] Sunrise    : " + String(myPlace.readSunrise(timezone)));
   Serial.println("[OpenWeather] Sunset     : " + String(myPlace.readSunset(timezone)));
+  Serial.println("[OpenWeather] DateTime   : " + String(myPlace.readDateTime(timezone)));
   Serial.println("--------------------------------------------");
+
 
 }
 

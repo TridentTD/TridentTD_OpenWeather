@@ -7,7 +7,6 @@
 
  Version 1.0  03/04/2560 Buddism Era  (2017) , support ESP8266
  Version 2.0  25/05/2561 Buddism Era  (2017) , support ESP32
- Version 3.0  06/05/2563 Buddism Era  (2020) , json parser by ArduinoJson 6.x
 
 Copyright (c) 2016-2020 TridentTD
 
@@ -32,7 +31,6 @@ SOFTWARE.
 
 #include "TridentTD_OpenWeather.h"
 #include "time.h"
-#include <ArduinoJson.h>
 
 /**
  * Constructor.
@@ -78,7 +76,7 @@ String TridentTD_OpenWeather::longitude(){
 
 bool TridentTD_OpenWeather::weatherNow(){
 
-	_getSuccess = false;
+
 
   //------------ OpenWeather API ----------------------------
   String  url  = "http://api.openweathermap.org/data/2.5/weather";
@@ -93,7 +91,7 @@ bool TridentTD_OpenWeather::weatherNow(){
   int httpCode = _http.GET();
   if(httpCode > 0) {
     if(httpCode == HTTP_CODE_OK) {
-      // _getSuccess = true;
+      _getSuccess = true;
 
       String payload = _http.getString();
       
@@ -101,47 +99,20 @@ bool TridentTD_OpenWeather::weatherNow(){
       
       _http.end();
       
-      DynamicJsonDocument doc(1024);
-      auto error = deserializeJson(doc, payload.c_str());
-
-      if(error) {
-        _getSuccess = false;
-        return false;
-      }else {
-        const char* w      = doc["weather"][0]["main"];
-        const char* w_icon = doc["weather"][0]["icon"];
-        _weather = String(w);
-        _weather_icon =  String(w_icon) + ".png";
-        _temperature = doc["main"]["temp"];
-        _feels_like = doc["main"]["feels_like"];
-        _temp_min = doc["main"]["temp_min"];
-        _temp_max = doc["main"]["temp_max"];
-        _pressure = doc["main"]["pressure"];
-        _humidity = doc["main"]["humidity"];
-        _windspeed = doc["wind"]["speed"];
-        _winddeg = doc["wind"]["deg"];
-        _cloudiness = doc["clouds"]["all"];  // %
-        _dt = doc["dt"];
-        _sunrise = doc["sys"]["sunrise"];
-        _sunset = doc["sys"]["sunset"];
-
-        _getSuccess = true;
-        return true;
-      }
-      // _weather      = payload.substring( 14+payload.indexOf("description"), payload.indexOf("icon")-3);
-      // _temperature  = payload.substring( 6+payload.indexOf("temp\""),payload.indexOf("pressure")-2).toFloat();
-      // _pressure     = payload.substring( 10+payload.indexOf("pressure"),payload.indexOf("humidity")-2).toFloat();
-      // _humidity     = payload.substring( 10+payload.indexOf("humidity"),payload.indexOf("temp_min")-2).toFloat();
-      // _windspeed    = payload.substring( 7+payload.indexOf("speed"), payload.indexOf("deg")-2).toFloat();
-      // _winddeg      = payload.substring( 5+payload.indexOf("deg"), payload.indexOf("},\"clouds")).toFloat();
-      // _cloudiness   = payload.substring( 15+payload.indexOf("clouds\":{\"all"),payload.indexOf("dt")-3).toFloat();
+      _weather      = payload.substring( 14+payload.indexOf("description"), payload.indexOf("icon")-3);
+      _temperature  = payload.substring( 6+payload.indexOf("temp\""),payload.indexOf("pressure")-2).toFloat();
+      _pressure     = payload.substring( 10+payload.indexOf("pressure"),payload.indexOf("humidity")-2).toFloat();
+      _humidity     = payload.substring( 10+payload.indexOf("humidity"),payload.indexOf("temp_min")-2).toFloat();
+      _windspeed    = payload.substring( 7+payload.indexOf("speed"), payload.indexOf("deg")-2).toFloat();
+      _winddeg      = payload.substring( 5+payload.indexOf("deg"), payload.indexOf("},\"clouds")).toFloat();
+      _cloudiness   = payload.substring( 15+payload.indexOf("clouds\":{\"all"),payload.indexOf("dt")-3).toFloat();
       
-      // _sunrise      = (time_t) payload.substring( 9+payload.indexOf("sunrise"),payload.indexOf("sunset")-2).toFloat();
-      // _sunset       = (time_t) payload.substring( 8+payload.indexOf("sunset"),payload.indexOf("},\"id\"")).toFloat();
+      _sunrise      = (time_t) payload.substring( 9+payload.indexOf("sunrise"),payload.indexOf("sunset")-2).toFloat();
+      _sunset       = (time_t) payload.substring( 8+payload.indexOf("sunset"),payload.indexOf("},\"id\"")).toFloat();
       
 
 
-      
+      return true;
     }
   } else {
     DEBUG_PRINT("[HTTP] GET... failed, error: "); DEBUG_PRINTLN(_http.errorToString(httpCode).c_str());
@@ -154,21 +125,6 @@ bool TridentTD_OpenWeather::weatherNow(){
 float TridentTD_OpenWeather::readTemperature(){
   while( !_getSuccess ) { weatherNow(); }
   return _temperature;
-}
-
-float TridentTD_OpenWeather::readTempMin(){
-  while( !_getSuccess ) { weatherNow(); }
-  return _temp_min;
-}
-
-float TridentTD_OpenWeather::readTempMax(){
-  while( !_getSuccess ) { weatherNow(); }
-  return _temp_max;
-}
-
-float  TridentTD_OpenWeather::readTempFeelsLike(){
-  while( !_getSuccess ) { weatherNow(); }
-  return _feels_like;
 }
 
 float TridentTD_OpenWeather::readHumidity(){
@@ -184,11 +140,6 @@ int TridentTD_OpenWeather::readPressure(){
 String TridentTD_OpenWeather::readWeather(){
   while( !_getSuccess ) { weatherNow(); }
   return _weather;
-}
-
-String  TridentTD_OpenWeather::readWeatherIcon(){
-  while( !_getSuccess ) { weatherNow(); }
-  return _weather_icon;
 }
 
 float TridentTD_OpenWeather::readWindSpeed(){
@@ -225,16 +176,6 @@ String TridentTD_OpenWeather::readSunset(int timezone){
   String sunset  = buffer.substring( buffer.indexOf(":") - 2, buffer.indexOf(":") + 6);
 
   return  sunset;
-}
-
-String TridentTD_OpenWeather::readDateTime(int timezone){
-  while( !_getSuccess ) { weatherNow(); }
-
-  time_t t = _dt + timezone*3600;
-  String buffer  = ctime(&t);
-  String datetime  = buffer.substring( buffer.indexOf(":") - 2, buffer.indexOf(":") + 6);
-
-  return  datetime;
 }
 
 bool TridentTD_OpenWeather::wificonnect(char* ssid, char* pass){
