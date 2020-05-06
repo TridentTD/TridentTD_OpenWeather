@@ -16,6 +16,8 @@ where `~/Documents/Arduino` is your sketchbook directory.
     > mkdir libraries
     > cd libraries
     > git clone https://github.com/TridentTD/TridentTD_OpenWeather.git TridentTD_OpenWeather
+  
+and install ArduinoJson library version 6.x  
 
 # Usage
 
@@ -71,26 +73,35 @@ myPlace.weatherNow();
 ```
 
 ### readTemperature()
+### readTempMin()
+### readTempMax()
+### readTempFeelsLike()
 ### readHumidity()
 ### readPressure()
 ### readWeather()
+### readWeatherIcon()
 ### readWindSpeed()
 ### readWindDeg()
 ### readCloudiness()
 ### readSunrise(timezone)
 ### readSunset(timezone)
-
+### readDateTime(int timezone)
 
 ```c++
-myPlace.readTemperature();  // unit = celcius (metric) or Fahrenheit (imperial)
-myPlace.readHumidity();       // unit = %
-myPlace.readPressure();        // unit = hPa
-myPlace.readWeather(); 
-myPlace.readWindSpeed();   // unit = meter/sec (metric) or miles/hour (imperial)
-myPlace.readWindDeg();      // unit = degrees
-myPlace.readCloudiness();   // unit = %
-myPlace.readSunrise(timezone);
-myPlace.readSunset(timezone);
+  Serial.println("[OpenWeather] Location   : " + myPlace.latitude() + ", "+ myPlace.longitude() );
+  Serial.println("[OpenWeather] Temperature: " + String(myPlace.readTemperature()));  // [metric] Celcius  or [imperial] Fahrenheit
+  Serial.println("[OpenWeather] Temp Min   : " + String(myPlace.readTempMin()));  // [metric] Celcius  or [imperial] Fahrenheit
+  Serial.println("[OpenWeather] Temp Max   : " + String(myPlace.readTempMax()));  // [metric] Celcius  or [imperial] Fahrenheit
+  Serial.println("[OpenWeather] Feels-Like : " + String(myPlace.readTempFeelsLike()));  // [metric] Celcius  or [imperial] Fahrenheit
+  Serial.println("[OpenWeather] Humidity   : " + String(myPlace.readHumidity()));     // %
+  Serial.println("[OpenWeather] Pressure   : " + String(myPlace.readPressure()));     // hPa
+  Serial.println("[OpenWeather] Weather    : " + myPlace.readWeather());
+  Serial.println("[OpenWeather] Wind Speed : " + String(myPlace.readWindSpeed()));    // [metric] meter/sec  or [imperial] miles/hour
+  Serial.println("[OpenWeather] Wind Deg   : " + String(myPlace.readWindDeg()));      // degrees
+  Serial.println("[OpenWeather] Cloudiness : " + String(myPlace.readCloudiness()));   // %
+  Serial.println("[OpenWeather] Sunrise    : " + String(myPlace.readSunrise(timezone)));
+  Serial.println("[OpenWeather] Sunset     : " + String(myPlace.readSunset(timezone)));
+  Serial.println("[OpenWeather] DateTime   : " + String(myPlace.readDateTime(timezone)));
 ```
 
 ### getVersion()
@@ -105,7 +116,8 @@ Version
 =====
 1.0.0  TridentTD_OpenWeather  
 2.0.0  support ESP32  
+3.0.0  json parser by ArduinoJson 6.x  
   
-@ 25 May 2561 BE (Buddhism Era) / 2018  
+@ 6 May 2563 BE (Buddhism Era) / 2020  
 Ven. Phaisarn Techajaruwong
 
