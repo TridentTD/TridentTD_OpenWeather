@@ -1,4 +1,5 @@
-TridentTD_OpenWeather: ASIF NADEEM
+TridentTD_OpenWeather: ASIF NADEEM change
+
 ============
 [TridentTD] Esp8266, ESP32 's OpenWeather Library
 ---------------------------------------------
@@ -16,7 +17,7 @@ where `~/Documents/Arduino` is your sketchbook directory.
     > mkdir libraries
     > cd libraries
     > git clone https://github.com/TridentTD/TridentTD_OpenWeather.git TridentTD_OpenWeather
-  
+
 and install ArduinoJson library version 6.x  
 
 # Usage
@@ -39,7 +40,7 @@ Constructor to create an TridentTD\_OpenWeather object.
 
 ### wificonnect( ssid,password)
 
-Setup the `ESP8266` board's `wifi` to the `ssid` . 
+Setup the `ESP8266` board's `wifi` to the `ssid` .
 However you can connect by yourself.
 
 ```c++
@@ -117,7 +118,6 @@ Version
 1.0.0  TridentTD_OpenWeather  
 2.0.0  support ESP32  
 3.0.0  json parser by ArduinoJson 6.x  
-  
+
 @ 6 May 2563 BE (Buddhism Era) / 2020  
 Ven. Phaisarn Techajaruwong
-
