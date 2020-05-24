@@ -1,4 +1,4 @@
-TridentTD_OpenWeather: ASIF NADEEM change
+TridentTD_OpenWeather: ASIF NADEEM
 
 ============
 [TridentTD] Esp8266, ESP32 's OpenWeather Library
