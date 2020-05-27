@@ -2,7 +2,7 @@
 
  [TridentTD] : MANABU's Esp8266 IoT Library
  www.facebook.com/miniNodeMCU
- 
+
  TridentTD_OpenWeather.h - A simple client for OpenWeatherMap
 
  Version 1.0  03/04/2560 Buddism Era  (2017) , support ESP8266
@@ -33,6 +33,7 @@ SOFTWARE.
 #include "TridentTD_OpenWeather.h"
 #include "time.h"
 #include <ArduinoJson.h>
+#include <JsonListener.h>
 
 /**
  * Constructor.
@@ -75,7 +76,6 @@ String TridentTD_OpenWeather::longitude(){
   return _lon;
 }
 
-
 bool TridentTD_OpenWeather::weatherNow(){
 
 	_getSuccess = false;
@@ -89,18 +89,18 @@ bool TridentTD_OpenWeather::weatherNow(){
 
   DEBUG_PRINTLN(url);
 
-  _http.begin(url);  
+  _http.begin(url);
   int httpCode = _http.GET();
   if(httpCode > 0) {
     if(httpCode == HTTP_CODE_OK) {
       // _getSuccess = true;
 
       String payload = _http.getString();
-      
+
       DEBUG_PRINTLN(payload);DEBUG_PRINTLN();
-      
+
       _http.end();
-      
+
       DynamicJsonDocument doc(1024);
       auto error = deserializeJson(doc, payload.c_str());
 
@@ -135,13 +135,89 @@ bool TridentTD_OpenWeather::weatherNow(){
       // _windspeed    = payload.substring( 7+payload.indexOf("speed"), payload.indexOf("deg")-2).toFloat();
       // _winddeg      = payload.substring( 5+payload.indexOf("deg"), payload.indexOf("},\"clouds")).toFloat();
       // _cloudiness   = payload.substring( 15+payload.indexOf("clouds\":{\"all"),payload.indexOf("dt")-3).toFloat();
-      
+
       // _sunrise      = (time_t) payload.substring( 9+payload.indexOf("sunrise"),payload.indexOf("sunset")-2).toFloat();
       // _sunset       = (time_t) payload.substring( 8+payload.indexOf("sunset"),payload.indexOf("},\"id\"")).toFloat();
-      
 
 
-      
+
+
+    }
+  } else {
+    DEBUG_PRINT("[HTTP] GET... failed, error: "); DEBUG_PRINTLN(_http.errorToString(httpCode).c_str());
+    _http.end();
+    _getSuccess = false;
+    return false;
+  }
+}
+
+
+bool TridentTD_OpenWeather::weatherCurrent(){
+
+	_getSuccess = false;
+
+  //------------ OpenWeather API ----------------------------
+  String  url  = "http://api.openweathermap.org/data/2.5/onecall?";
+          url += "lat="   + _lat;
+          url += "&lon="   + _lon;
+          url += "minutely,hourly,daily";
+          url += "&appid=" + _api_key;
+          url += "&units=" + _unit_type;
+
+
+  DEBUG_PRINTLN(url);
+
+  _http.begin(url);
+  int httpCode = _http.GET();
+  if(httpCode > 0) {
+    if(httpCode == HTTP_CODE_OK) {
+      // _getSuccess = true;
+
+      String payload = _http.getString();
+
+      DEBUG_PRINTLN(payload);DEBUG_PRINTLN();
+
+      _http.end();
+
+      const size_t capacity = JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(4) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(14) + 240;
+      DynamicJsonDocument doc(capacity);
+      auto error = deserializeJson(doc, payload.c_str());
+
+      if(error) {
+        _getSuccess = false;
+        return false;
+      }else {
+
+        JsonObject current = doc["current"];
+        _weather_2_ = current["weather"][0]["main"];
+        _weather_icon_2_ = current["weather"][0]["icon"];
+        _temperature = current["temp"];
+        _feels_like = current["feels_like"];
+        _pressure = current["pressure"];
+        _humidity = current["humidity"];
+        _windspeed = current["wind_speed"];
+        _winddeg = current["wind_deg"];
+        _cloudiness = current["clouds"];  // %
+        _dt = current["dt"];
+        _sunrise = current["sunrise"];
+        _sunset = current["sunset"];
+
+        return true;
+      }
+      // _weather      = payload.substring( 14+payload.indexOf("description"), payload.indexOf("icon")-3);
+      // _temperature  = payload.substring( 6+payload.indexOf("temp\""),payload.indexOf("pressure")-2).toFloat();
+      // _pressure     = payload.substring( 10+payload.indexOf("pressure"),payload.indexOf("humidity")-2).toFloat();
+      // _humidity     = payload.substring( 10+payload.indexOf("humidity"),payload.indexOf("temp_min")-2).toFloat();
+      // _windspeed    = payload.substring( 7+payload.indexOf("speed"), payload.indexOf("deg")-2).toFloat();
+      // _winddeg      = payload.substring( 5+payload.indexOf("deg"), payload.indexOf("},\"clouds")).toFloat();
+      // _cloudiness   = payload.substring( 15+payload.indexOf("clouds\":{\"all"),payload.indexOf("dt")-3).toFloat();
+
+      // _sunrise      = (time_t) payload.substring( 9+payload.indexOf("sunrise"),payload.indexOf("sunset")-2).toFloat();
+      // _sunset       = (time_t) payload.substring( 8+payload.indexOf("sunset"),payload.indexOf("},\"id\"")).toFloat();
+
+
+
+
     }
   } else {
     DEBUG_PRINT("[HTTP] GET... failed, error: "); DEBUG_PRINTLN(_http.errorToString(httpCode).c_str());
@@ -239,7 +315,7 @@ String TridentTD_OpenWeather::readDateTime(int timezone){
 
 bool TridentTD_OpenWeather::wificonnect(char* ssid, char* pass){
   WiFi.begin(ssid, pass);
-  
+
   DEBUG_PRINTLN();
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);

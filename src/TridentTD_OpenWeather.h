@@ -2,13 +2,13 @@
 
  [TridentTD] : MANABU's Esp8266 IoT Library
  www.facebook.com/miniNodeMCU
- 
+
  TridentTD_OpenWeather.h - A simple client for OpenWeatherMap
 
  Version 1.0  03/04/2560 Buddism Era  (2017) , support ESP8266
  Version 2.0  25/05/2561 Buddism Era  (2017) , support ESP32
  Version 3.0  06/05/2563 Buddism Era  (2020) , json parser by ArduinoJson 6.x
- 
+
 Copyright (c) 2016-2020 TridentTD
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -60,18 +60,21 @@ SOFTWARE.
     #define DEBUG_PRINTLN(...) { }
 #endif
 
+
+
 class TridentTD_OpenWeather {
   public:
     TridentTD_OpenWeather(String api_key);
 
     void    setLocation(float lat, float lon);
- 
+
     //option to set unit_type
     // METRIC ( Celcius, meter/sec)
     // or IMPERIAL (Fahrenheit, miles/hour)
     void    setUnit(String unit_type);
 
 
+    bool    weatherCurrent();
     bool    weatherNow();
 
     float   readTemperature();
@@ -100,6 +103,8 @@ class TridentTD_OpenWeather {
 
     String  _weather;
     String  _weather_icon;
+    const char*  _weather_2_;
+    const char*  _weather_icon_2_;
     float   _temperature;  // Calcius
     float   _feels_like;
     float   _temp_min;
@@ -113,7 +118,7 @@ class TridentTD_OpenWeather {
     time_t  _sunset;    // unix, UTC
     time_t  _dt;         // datetime unix, UTC
 
-    
+
 
     HTTPClient  _http;
     bool    _getSuccess;
@@ -126,5 +131,5 @@ class TridentTD_OpenWeather {
 }
 ;
 
-#endif 
+#endif
 /* _TridentTD_OpenWeather_H_ */
